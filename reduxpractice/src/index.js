@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -14,18 +14,19 @@ const initialStore = {
     lastValues: []
 };
 
-const reducer = ( state , action ) => {
+const reducer = ( state = initialStore , action ) => {
   switch (action.type) {
     case "ADD":
-        state = state + action.payload;
+        state.result += action.payload;
         break;
     case "SUBTRACT":
-      break;
+        state.result -= action.payload;
+        break;
   }
   return state;
 }
 
-const store = createStore(reducer, 1);
+const store = createStore(reducer);
 
 store.subscribe(() => {
     console.log("Store updated!", store.getState());
