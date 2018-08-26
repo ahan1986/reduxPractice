@@ -1,45 +1,35 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
+import { Main } from './components/Main';
+import { User } from './components/User';
 
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-          
-//           <h1 className="App-title">Welcome to React</h1>
-//         </header>
-//         <p className="App-intro">
-//           To get started, edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-// export default App;
+    this.state = {
+      username: 'Andrew'
+    }
 
-
-
-const initialStore = {
-    result: 1,
-    lastValues: []
-};
-
-const reducer = ( state , action ) => {
-  switch (action.type) {
-    case "ADD":
-      break;
-    case "SUBTRACT":
-      break;
+    this.changeUsername = this.changeUsername.bind(this);
   }
-  return state;
+
+  changeUsername (newName) {
+    this.setState({
+      username: newName
+    });
+  }
+
+  render() {
+    return (
+      <div className='container'>
+        <Main changeUsername={this.changeUsername} />
+        <User username={this.state.username} />
+      </div>
+    );
+  }
 }
 
-const store = createStore(reducer, 1);
+export default App;
 
-store.dispatch({
-    type: 'ADD',
-    payload: 100
-})
+
