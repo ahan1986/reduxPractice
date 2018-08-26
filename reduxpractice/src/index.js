@@ -3,30 +3,68 @@
 // import './index.css';
 // import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
 
 
-const initialStore = {
+
+
+const mathReducer = ( state = {
     result: 1,
     lastValues: []
-};
-
-const reducer = ( state = initialStore , action ) => {
+} , action ) => {
   switch (action.type) {
     case "ADD":
-        state.result += action.payload;
+        state = {
+            ...state,
+            result: state.result + action.payload,
+            lastValues: [...state.lastValues, action.payload]
+        }
+        
         break;
     case "SUBTRACT":
-        state.result -= action.payload;
+        state = {
+            result: state.result,
+            lastValues: [],
+            result: state.result + action.payload,
+            lastValues: [...state.lastValues, action.payload]
+        };
+        
         break;
   }
   return state;
 }
 
-const store = createStore(reducer);
+// another reducer for users
+const userReducer = ( state = {
+    name: 'Andrew',
+    age: 31
+} , action ) => {
+    switch (action.type) {
+      case "SET_NAME":
+          state = {
+              ...state,
+              name: action.payload
+          }
+          
+          break;
+      case "SET_AGE":
+          state = {
+              ...state,
+              name: action.payload
+          };
+          
+          break;
+    }
+    return state;
+  }
+
+const store = createStore(combineReducers({
+    mathReducer,
+    userReducer
+}));
 
 store.subscribe(() => {
     console.log("Store updated!", store.getState());
