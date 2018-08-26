@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Main } from './components/Main';
 import { User } from './components/User';
 
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 

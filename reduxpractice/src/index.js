@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+
 
 // import { createStore, combineReducers, applyMiddleware } from 'redux';
 // import { createLogger } from 'redux-logger';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
-
-
-
 
 // const mathReducer = ( state = {
 //     result: 1,

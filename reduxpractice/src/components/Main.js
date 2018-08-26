@@ -9,6 +9,7 @@ export class Main extends React.Component {
                         <h1>The Main Page</h1>
                     </div>
                 </div>
+                
                 <div className = 'row'>
                     <div className = 'col-xs-12'>
                         <button
