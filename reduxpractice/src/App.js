@@ -1,16 +1,12 @@
 import React from 'react';
 import { Main } from './components/Main';
 import { User } from './components/User';
-import { connect } from 'tls';
+import { connect } from 'react-redux';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      username: 'Andrew'
-    }
 
     this.changeUsername = this.changeUsername.bind(this);
   }
@@ -24,11 +20,12 @@ class App extends React.Component {
   render() {
     return (
       <div className='container'>
-        <Main changeUsername={this.changeUsername} />
+        {/* because i'm using an argument, I need the fat arrow function */}
+        <Main changeUsername={() => this.props.setName("Anna")} />
         {/* redux uses props and populates it. From the userReducer in index.js, there's a property named "name" and "age" we can now access */}
         <User username={this.props.user1.name} />
       </div>
-    );
+    ); 
   }
 }
 
