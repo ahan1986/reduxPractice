@@ -1,52 +1,28 @@
-import React from 'react';
-import { Main } from './components/Main';
-import { User } from './components/User';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import './App.css';
+import { Provider } from 'react-redux';
 
+import Posts from './components/Posts';
+import PostForm from './components/Postform';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+import store from './store';
 
-    this.changeUsername = this.changeUsername.bind(this);
-  }
-
-  changeUsername (newName) {
-    this.setState({
-      username: newName
-    });
-  }
-
+class App extends Component {
   render() {
     return (
-      <div className='container'>
-        {/* because i'm using an argument, I need the fat arrow function */}
-        <Main changeUsername={() => this.props.setName("Anna")} />
-        {/* redux uses props and populates it. From the userReducer in index.js, there's a property named "name" and "age" we can now access */}
-        <User username={this.props.user1.name} />
-      </div>
-    ); 
+      <Provider store={store}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+          </header>
+          <PostForm />
+          <hr />
+          <Posts />
+        </div>
+      </Provider>
+    );
   }
 }
 
-// this function allows redux to connect with components but you also need another function called connect() to connects react.js with redux
-const mapStateToProps = (state) => {
-  return {
-    user1: state.userReducerGuy,
-    math1: state.mathReducerGuy
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setName: (name) => {
-      dispatch({
-        type: "SET_NAME",
-        payload: name
-      })
-    }
-  }
-}
-
-//don't need to export default the App in this class. We can now do it this way below
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App;
